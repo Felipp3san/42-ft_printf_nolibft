@@ -36,7 +36,8 @@ SRC_FILES =	ft_printf \
 			ft_strlen \
 			ft_putstr_fd \
 			ft_putchar_fd \
-			ft_itoa\
+			ft_itoa \
+			ft_atoi \
 
 SRCS		= $(addprefix $(SRC_DIR)/, $(addsuffix .c, $(SRC_FILES)))
 OBJS 		= $(addprefix $(BUILD_DIR)/, $(addsuffix .o, $(SRC_FILES)))

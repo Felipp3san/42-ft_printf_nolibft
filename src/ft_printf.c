@@ -24,7 +24,7 @@
  * %% - percent sign
 */
 
-static int	printf_format(va_list	*va, char ch)
+static int	printf_format(va_list	*va, char ch, int padding)
 {
 	const char	*base10 = "0123456789";
 	const char	*base16 = "0123456789abcdef";
@@ -33,7 +33,7 @@ static int	printf_format(va_list	*va, char ch)
 	if (ch == 'c')
 		return (ft_printchar((char)va_arg(*va, int)));
 	else if (ch == 'd' || ch == 'i')
-		return (ft_printnbr(va_arg(*va, int)));
+		return (ft_printnbr(va_arg(*va, int), padding));
 	else if (ch == 'u')
 		return (ft_printunbr_base(va_arg(*va, unsigned int), base10));
 	else if (ch == 'p')
@@ -50,15 +50,24 @@ static int	printf_format(va_list	*va, char ch)
 
 int	ft_printf(const char *fstring, ...)
 {
-	va_list	va;
-	size_t	ch_count;
+	va_list		va;
+	size_t		padding;
+	size_t		nbdigits_pad;
+	size_t		ch_count;
 
+	nbdigits_pad = 0;
+	padding = 0;
 	ch_count = 0;
 	va_start(va, fstring);
 	while (*fstring)
 	{
 		if (*fstring == '%')
-			ch_count += printf_format(&va, *++fstring);
+		{
+			padding = atoi(++fstring);
+			nbdigits_pad = ft_nbdigits_base(padding, 10);
+			fstring = fstring + nbdigits_pad;
+			ch_count += printf_format(&va, *fstring, padding);
+		}
 		else
 		{
 			ft_putchar_fd(*fstring, 1);

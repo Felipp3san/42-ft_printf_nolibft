@@ -114,5 +114,13 @@ int	main(void)
 	printf("Custom count: %d\n", count);
 	printf("===============================\n");
 
+	// Bonus
+	printf("===== BONUS =====\n");
+	count = printf("<<%10d>>\n", 1234);
+	printf("Original count: %d\n", count);
+	count = ft_printf("<<%10d>>\n", 1234);
+	printf("Custom count: %d\n", count);
+	printf("===============================\n");
+
 	return (0);
 }

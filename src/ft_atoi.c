@@ -1,30 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printnbr.c                                      :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fde-alme <fde-alme@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/25 19:20:38 by fde-alme          #+#    #+#             */
-/*   Updated: 2025/04/25 19:21:06 by fde-alme         ###   ########.fr       */
+/*   Created: 2025/04/29 18:53:20 by fde-alme          #+#    #+#             */
+/*   Updated: 2025/04/29 18:53:27 by fde-alme         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_printnbr(int nbr, size_t padding)
+static int	ft_isspace(int c)
 {
-	char	*str;
-	size_t	size;
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (1);
+	else
+		return (0);
+}
 
-	str = ft_itoa(nbr);
-	size = ft_strlen(str);
-	while (size < padding)
+int	ft_atoi(const char *nptr)
+{
+	int		nbr;
+	int		sign;
+	size_t	i;
+
+	sign = 1;
+	nbr = 0;
+	i = 0;
+	while (ft_isspace(nptr[i]))
+		i++;
+	if (nptr[i] == '-')
 	{
-		ft_putchar_fd(32, 1);
-		size++;
+		sign = -1;
+		i++;
 	}
-	ft_putstr_fd(str, 1);
-	free(str);
-	return (size);
+	else if (nptr[i] == '+')
+		i++;
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		nbr = (nbr * 10) + (nptr[i] - '0');
+		i++;
+	}
+	return (nbr * sign);
 }

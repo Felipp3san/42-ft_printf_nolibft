@@ -23,13 +23,14 @@
 
 int		ft_printf(const char *fstring, ...);
 void	ft_putnbr_base(int nb, char *base);
-size_t	ft_printnbr(int nbr);
+size_t	ft_printnbr(int nbr, size_t padding);
 size_t	ft_printstr(char *str);
 size_t	ft_printchar(char ch);
 size_t	ft_printptr(uintptr_t ptr);
 size_t	ft_printunbr_base(unsigned int nbr, const char *base);
 size_t	ft_nbdigits_base(unsigned long long nbr, size_t base_len);
 char	*ft_uitoa_base(unsigned int nbr, const char *base);
+int		ft_atoi(const char *nptr);
 
 // Libft files
 
